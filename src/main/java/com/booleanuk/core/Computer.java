@@ -4,13 +4,19 @@ import java.util.ArrayList;
 
 public class Computer {
     public ArrayList<Game> installedGames = new ArrayList<>();
+    private Game game;
+    private PowerSupply power;
     public Computer(PowerSupply power, ArrayList<Game> installedGames) {
         this.installedGames = installedGames;
+        this.power = power;
         power.turnOn();
 
     }
     public Computer(PowerSupply power) {
         power.turnOn();
+    }
+    public Computer(Game game) {
+        game.start();
     }
 
 
