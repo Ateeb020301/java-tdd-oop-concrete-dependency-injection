@@ -11,7 +11,6 @@ class ComputerTest {
         PowerSupply myPsu = new PowerSupply();
         Computer myPc = new Computer(myPsu);
         myPc.turnOn();
-
         Assertions.assertTrue(myPsu.isOn);
     }
 
@@ -20,10 +19,11 @@ class ComputerTest {
         PowerSupply myPsu = new PowerSupply();
         Computer myPc = new Computer(myPsu);
 
-        myPc.installGame("Final Fantasy XI");
+        Game game = new Game("Final Fantasy XI");
+        myPc.installGame(game);
 
-        Assertions.assertEquals(1, myPc.installedGames.size());
-        Assertions.assertEquals("Final Fantasy XI", myPc.installedGames.get(0).name);
+        Assertions.assertEquals(1, myPc.getNumberOfInstalledGames());
+        Assertions.assertEquals("Final Fantasy XI", myPc.getGameNameAtIndex(0));
     }
 
     @Test

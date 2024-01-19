@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class Computer {
     public ArrayList<Game> installedGames = new ArrayList<>();
-    private Game game;
     private PowerSupply power;
     public Computer(PowerSupply power, ArrayList<Game> installedGames) {
         this.installedGames = installedGames;
@@ -27,9 +26,8 @@ public class Computer {
         psu.turnOn();
     }
 
-    public void installGame(String g) {
-        Game game = new Game(g);
-        this.installedGames.add(game);
+    public void installGame(Game g) {
+        this.installedGames.add(g);
     }
 
     public String playGame(String ga) {
@@ -39,6 +37,12 @@ public class Computer {
             }
         }
         return "Game not installed";
+    }
+    public int getNumberOfInstalledGames(){
+        return this.installedGames.size();
+    }
+    public String getGameNameAtIndex(int index){
+        return this.installedGames.get(index).getName();
     }
 
 }
