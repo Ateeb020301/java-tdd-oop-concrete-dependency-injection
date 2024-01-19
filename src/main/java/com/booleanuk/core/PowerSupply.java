@@ -11,4 +11,9 @@ public class PowerSupply {
 
         this.isOn = false;
     }
+
+    public boolean isOn() {
+        this.isOn = true;
+        return true;
+    }
 }

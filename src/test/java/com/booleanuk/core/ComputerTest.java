@@ -7,12 +7,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 class ComputerTest {
+
     @Test
     public void shouldTurnOn() {
         PowerSupply myPsu = new PowerSupply();
         Computer myPc = new Computer(myPsu);
-        myPc.turnOn();
-        Assertions.assertTrue(myPsu.isOn);
+        Assertions.assertTrue(myPsu.isOn());
     }
 
     @Test
@@ -20,8 +20,8 @@ class ComputerTest {
         PowerSupply myPsu = new PowerSupply();
         Computer myPc = new Computer(myPsu);
 
-        Game game = new Game("Final Fantasy XI");
-        myPc.installGame(game);
+        Game ffXi = new Game("Final Fantasy XI");
+        myPc.installGame(ffXi);
 
         Assertions.assertEquals(1, myPc.getNumberOfInstalledGames());
         Assertions.assertEquals("Final Fantasy XI", myPc.getGameNameAtIndex(0));
@@ -32,10 +32,10 @@ class ComputerTest {
         PowerSupply myPsu = new PowerSupply();
         Computer myPc = new Computer(myPsu);
 
-       Game game1 = new Game("Duck game");
-       Game game2 = new Game("Dragon's Dogma: Dark Arisen");
-       myPc.installGame(game1);
-       myPc.installGame(game2);
+        Game duckGame = new Game("Duck Game");
+        Game dragonsDogma = new Game("Dragon's Dogma: Dark Arisen");
+        myPc.installGame(duckGame);
+        myPc.installGame(dragonsDogma);
 
         Assertions.assertEquals("Playing Duck Game", myPc.playGame("Duck Game"));
         Assertions.assertEquals("Playing Dragon's Dogma: Dark Arisen", myPc.playGame("Dragon's Dogma: Dark Arisen"));
@@ -45,14 +45,16 @@ class ComputerTest {
     @Test
     public void canPreinstallGames() {
         PowerSupply myPsu = new PowerSupply();
-        Game game1 = new Game("Duck game");
-        Game game2 = new Game("Dragon's Dogma: Dark Arisen");
+        ArrayList<Game> preInstalled = new ArrayList<>(Arrays.asList(
+                new Game("Dwarf Fortress"),
+                new Game("Baldur's Gate")
+        ));
 
-
-        Computer myPc = new Computer(myPsu, (ArrayList<Game>) Arrays.asList(game1,game2));
+        Computer myPc = new Computer(myPsu, preInstalled);
 
         Assertions.assertEquals(2, myPc.getNumberOfInstalledGames());
         Assertions.assertEquals("Dwarf Fortress", myPc.getGameNameAtIndex(0));
         Assertions.assertEquals("Baldur's Gate", myPc.getGameNameAtIndex(1));
     }
+
 }
